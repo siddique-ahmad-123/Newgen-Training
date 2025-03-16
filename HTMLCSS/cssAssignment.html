@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Reviews Pages</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #c1c0bc;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2em;
+            margin-top: 50px;
+            font-family: 'Roboto', sans-serif;
+            color: blue;
+        }
+
+        /* Container styling */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin: 40px;
+        }
+
+        /* Movie card styling */
+        .movie {
+            background-color: #fff;
+            color: #333;
+            border-radius: 15px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transform: scale(1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .movie:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .movie img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 4px solid #2575fc;
+        }
+
+        .movie h3 {
+            font-size: 1.5em;
+            margin: 15px;
+            color: #2575fc;
+        }
+
+        .movie h4 {
+            font-size: 1.2em;
+            color: #ff5f57;
+            margin: 0 15px;
+        }
+
+        .movie p {
+            font-size: 1em;
+            color: #555;
+            margin: 15px;
+            line-height: 1.6;
+        }
+
+        /* Footer (optional) */
+        footer {
+            text-align: center;
+            font-size: 1em;
+            margin-top: 50px;
+            color: #fff;
+            padding: 20px;
+            background-color: #333;
+        }
+
+        /* Highlighted movie */
+        .highlight {
+            border: 3px dotted #2575fc;
+        }
+
+    </style>
+    <script>
+        // Function to apply highlight based on URL parameter
+        function highlightMovieFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const movieIdToHighlight = parseInt(urlParams.get("hl"));
+
+            let movieElement = null;
+            
+            switch (movieIdToHighlight) {
+                case 1:
+                    movieElement = document.getElementById("TheGodMustbeCrazy");
+                    break;
+                case 2:
+                    movieElement = document.getElementById("HomeAlone");
+                    break;
+                case 3:
+                    movieElement = document.getElementById("Cars");
+                    break;
+                case 4:
+                    movieElement = document.getElementById("KungFuPanda");
+                    break;
+                case 5:
+                    movieElement = document.getElementById("BrotherBear");
+                    break;
+                case 6:
+                    movieElement = document.getElementById("EndGame");
+                    break;
+                case 7:
+                    movieElement = document.getElementById("FinalDestination");
+                    break;
+                case 8:
+                    movieElement = document.getElementById("Conjuring2");
+                    break;
+                case 9:
+                    movieElement = document.getElementById("TheNun");
+                    break;
+            }
+
+            if (movieElement) {
+                movieElement.style.borderStyle = "dotted"; // Add dotted border
+                movieElement.scrollIntoView({ behavior: "smooth", block: "center" }); // Scroll to the movie
+            }
+        }
+
+        // JSON data for the movies
+        const moviesData = [
+            {
+                "id": "TheGodMustbeCrazy",
+                "title": "The God Must be Crazy",
+                "rating": "5/5",
+                "description": "PANDAS is an IMAX nature documentary narrated by Kristen Bell about arguably the most adorable bears in the animal kingdom. At the Chengdu Research Base of Giant Panda Breeding in Sichuan, China, researchers and animal experts have worked on a captive breeding program that aims to save this endangered species.",
+                "image": "https://alchetron.com/cdn/The-Gods-Must-Be-Crazy-images-a12e2ca1-3431-4ded-8d41-99d7c4e7776.jpg"
+            },
+            {
+                "id": "HomeAlone",
+                "title": "Home Alone",
+                "rating": "5/5",
+                "description": "This animated movie takes us through the high-speed world of racing, featuring Lightning McQueen, a race car who learns about life, friendship, and what truly matters in the fast lane.",
+                "image": "https://m.media-amazon.com/images/S/pv-target-images/6cf8e71c230bdb27575ad916aa81adaf9a0ba2922f4066a7d5d1b9b023ce84c1.jpg"
+            },
+            {
+                "id": "Cars",
+                "title": "Cars",
+                "rating": "5/5",
+                "description": "This documentary captures the lives of bears in their natural habitat, focusing on the struggles and triumphs of these majestic creatures as they navigate through the seasons and protect their young.",
+                "image": "https://images8.alphacoders.com/800/800013.jpg"
+            },
+            {
+                "id": "KungFuPanda",
+                "title": "Kung Fu Panda",
+                "rating": "5/5",
+                "description": "An exciting documentary that takes viewers on a journey through uncharted territories and remote locations, unveiling the secrets of Earth's most mysterious places.",
+                "image": "https://www.worldatlas.com/upload/09/ec/bf/red-panda.jpg"
+            },
+            {
+                "id": "BrotherBear",
+                "title": "Brother Bear",
+                "rating": "5/5",
+                "description": "This thrilling movie follows a group of adventurers as they brave the wild, facing dangerous terrains and unknown challenges, all for the pursuit of hidden treasures.",
+                "image": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/F8DF2BC0497F0ADA9337C3B06BFA9FDB04A15F3EE8F7ABEFCC87167FF5E0AC32/scale?width=1200&aspectRatio=1.78&format=jpeg"
+            },
+            {
+                "id": "EndGame",
+                "title": "End Game",
+                "rating": "5/5",
+                "description": "A breathtaking documentary that highlights the wonders of wildlife from around the globe, showcasing the beauty, challenges, and resilience of animals in their natural environments.",
+                "image": "https://th.bing.com/th/id/R.134a5661acb17f04fb0d91fefdaf314f?rik=3tF%2f9Px3kjP7CA&riu=http%3a%2f%2fhdqwalls.com%2fwallpapers%2f2019-avengers-endgame-new-7p.jpg&ehk=mhuRGCIti8xl1Po7fIAwn%2bfWjI9YfnWeZikL6CW4WVQ%3d&risl=1&pid=ImgRaw&r=0"
+            },
+            {
+                "id": "FinalDestination",
+                "title": "Final Destination",
+                "rating": "5/5",
+                "description": "A breathtaking documentary that highlights the wonders of wildlife from around the globe, showcasing the beauty, challenges, and resilience of animals in their natural environments.",
+                "image": "https://m.media-amazon.com/images/M/MV5BZTI0NGM2OGYtNzVmMi00NGQ2LTk2MDAtN2RmYjIzMGRkZGYxXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_FMjpg_UX1000_.jpg"
+            },
+            {
+                "id": "Conjuring2",
+                "title": "Conjuring 2",
+                "rating": "5/5",
+                "description": "A breathtaking documentary that highlights the wonders of wildlife from around the globe, showcasing the beauty, challenges, and resilience of animals in their natural environments.",
+                "image": "https://tse3.mm.bing.net/th/id/OIP.yBl7DN2kLdMMUzzxx9dQkwHaKj?rs=1&pid=ImgDetMain"
+            },
+            {
+                "id": "TheNun",
+                "title": "The Nun",
+                "rating": "5/5",
+                "description": "A breathtaking documentary that highlights the wonders of wildlife from around the globe, showcasing the beauty, challenges, and resilience of animals in their natural environments.",
+                "image": "https://static1.cbrimages.com/wordpress/wp-content/uploads/2023/02/the-nun.jpg"
+            }
+        ];
+
+        // Function to dynamically generate movie cards
+        function generateMovieCards() {
+            const container = document.querySelector('.container');
+            moviesData.forEach(movie => {
+                const movieElement = document.createElement('div');
+                movieElement.classList.add('movie');
+                movieElement.id = movie.id;
+
+                movieElement.innerHTML = `
+                    <img src="${movie.image}" alt="${movie.title}">
+                    <h3>${movie.title}</h3>
+                    <h4>Rating: ${movie.rating}</h4>
+                    <p>${movie.description}</p>
+                `;
+
+                container.appendChild(movieElement);
+            });
+            // Call highlight function after movie cards are generated
+            highlightMovieFromURL();
+        }
+
+        window.onload = generateMovieCards;
+    </script>
+</head>
+
+<body>
+    <h1>Movie Reviews</h1>
+    <div class="container"></div>
+
+    <!-- Optional footer -->
+    <footer>
+        <p>&copy; 2025 Movie Reviews. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

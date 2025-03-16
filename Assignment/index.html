@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Information Form</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="form-container">
+    <h2>Personal Information Form</h2>
+    <form id="personalForm">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <span id="nameError" class="error-message"></span>
+      </div>
+      
+      <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+        <span id="ageError" class="error-message"></span>
+      </div>
+      
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" rows="4" required></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="pincode">Pincode:</label>
+        <input type="text" id="pincode" name="pincode" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="city">City:</label>
+        <select id="city" name="city" required>
+          <option value="">Select City</option>
+          <option value="New York">New York</option>
+          <option value="Los Angeles">Los Angeles</option>
+          <option value="Chicago">Chicago</option>
+          <option value="Houston">Houston</option>
+          <option value="Phoenix">Phoenix</option>
+        </select>
+        <span id="cityError" class="error-message"></span>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" id="okButton">OK</button>
+        <button type="button" id="resetButton">Reset</button>
+      </div>
+
+      <div id="confirmationMessage"></div>
+    </form>
+  </div>
+
+  <div id="resultContainer" class="result-container" style="display: none;">
+    <h2>Entered Information</h2>
+    <table id="resultTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Address</th>
+          <th>Pincode</th>
+          <th>City</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <button id="backButton">Back</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

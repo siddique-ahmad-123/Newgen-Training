@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Show</title>
+    <style>
+        body {
+            background-color: #aeaca5; /* Light blue background */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            position: relative; /* To position the button relative to the body */
+        }
+
+        h1 {
+            text-align: center;
+            color: #8B4513; /* Brown color */
+            font-size: 30px;
+            font-family: 'Algerian', serif;
+            margin-top: 25px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
+        }
+
+        hr {
+            border: 0;
+            height: 2px;
+            background-color: #8B4513; /* Brown color */
+            width: 80%;
+            margin: 5px auto; /* Reduce margin to bring underline closer */
+        }
+
+        p {
+            font-size: 14px;
+            color: #2F4F4F; /* Dark Slate Gray */
+            margin-right: 40px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        a:hover p {
+            color: #4682B4; /* Steel Blue color on hover */
+        }
+
+        /* Styling for the Register Now button */
+        .register-btn {
+            position: absolute; /* Position it in the right corner */
+            top: 69px; /* Set distance from the top */
+            right: 20px; /* Set distance from the right */
+            padding: 10px 20px;
+            font-size: 13px;
+            background-color: #8B4513; /* Brown color */
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 7px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .register-btn:hover {
+            background-color: #6A3D19; /* Darker brown on hover */
+            transform: scale(1.1); /* Slightly enlarges the button */
+        }
+
+        .register-btn:active {
+            transform: scale(1.05); /* Slightly smaller scale when clicked */
+        }
+
+        /* Responsive styling */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 25px;
+            }
+
+            p {
+                font-size: 10px;
+                text-align: center;
+                margin-right: 0;
+            }
+
+            .register-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+                top: 10px; /* Adjust button position for smaller screens */
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+     
+    <h1>Book Your Show</h1>
+    <hr>
+    <a href="forms assignment.html" name="header" target="Content">
+        <div class="register-btn">Register Now</div>
+    </a>
+
+</body>
+
+</html>

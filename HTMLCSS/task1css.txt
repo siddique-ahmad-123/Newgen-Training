@@ -1,0 +1,19 @@
+<html>
+
+<body>
+   <h1 class="A"> 1-Heading</h1>
+
+   
+   <style>
+   .A{
+       color:red;
+   }
+   .B{  background-color:blue;
+   }
+  
+   td p{
+   color:green;
+   }
+   </style>
+</body>
+</html>
