@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -239,9 +239,309 @@
     <div class="container"></div>
 
     <!-- Optional footer -->
-    <footer>
+    <!-- <footer>
         <p>&copy; 2025 Movie Reviews. All rights reserved.</p>
     </footer>
 </body>
 
+</html> --> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Reviews</title>
+    <style>
+        /* Same styles as before */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #c1c0bc;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2em;
+            margin-top: 50px;
+            font-family: 'Roboto', sans-serif;
+            color: blue;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin: 40px;
+        }
+
+        .movie {
+            background-color: #fff;
+            color: #333;
+            border-radius: 15px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transform: scale(1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .movie:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .movie img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 4px solid #2575fc;
+        }
+
+        .movie h3 {
+            font-size: 1.5em;
+            margin: 15px;
+            color: #2575fc;
+        }
+
+        .movie h4 {
+            font-size: 1.2em;
+            color: #ff5f57;
+            margin: 0 15px;
+        }
+
+        .movie p {
+            font-size: 1em;
+            color: #555;
+            margin: 15px;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 1em;
+            margin-top: 50px;
+            color: #fff;
+            padding: 20px;
+            background-color: #333;
+        }
+
+        .highlight {
+            border: 3px dotted #2575fc;
+        }
+
+        /* Form Styling */
+        .form-container {
+            margin-top: 20px;
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+        }
+
+        input, textarea {
+            padding: 10px;
+            margin: 10px 0;
+            width: 80%;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1e5bb8;
+        }
+
+        .movie-btns {
+            margin: 10px;
+        }
+    </style>
+    <script>
+        // Initialize localStorage if no data exists
+        if (!localStorage.getItem('reviews')) {
+            localStorage.setItem('reviews', JSON.stringify([]));
+        }
+
+        // Function to load the reviews from localStorage
+        function loadReviews() {
+            const reviews = JSON.parse(localStorage.getItem('reviews'));
+            const container = document.querySelector('.container');
+            container.innerHTML = '';  // Clear existing reviews
+
+            reviews.forEach((review, index) => {
+                const reviewDiv = document.createElement('div');
+                reviewDiv.classList.add('movie');
+                reviewDiv.id = `movie-${index}`;
+                reviewDiv.innerHTML = `
+                    <img src="${review.image}" alt="${review.title}">
+                    <h3>${review.title}</h3>
+                    <h4>Rating: ${review.rating}</h4>
+                    <p>${review.description}</p>
+                    <div class="movie-btns">
+                        <button onclick="editReview(${index})">Edit</button>
+                        <button onclick="deleteReview(${index})">Delete</button>
+                    </div>
+                `;
+                container.appendChild(reviewDiv);
+            });
+        }
+
+        // Create a new review
+        function createReview() {
+            const title = document.getElementById('title').value;
+            const rating = document.getElementById('rating').value;
+            const description = document.getElementById('description').value;
+            const image = document.getElementById('image').value;
+
+            const newReview = { title, rating, description, image };
+            const reviews = JSON.parse(localStorage.getItem('reviews'));
+            reviews.push(newReview);
+
+            localStorage.setItem('reviews', JSON.stringify(reviews));
+            loadReviews();  // Reload the reviews after adding
+        }
+
+        // Edit a review
+        function editReview(index) {
+            const reviews = JSON.parse(localStorage.getItem('reviews'));
+            const review = reviews[index];
+
+            document.getElementById('title').value = review.title;
+            document.getElementById('rating').value = review.rating;
+            document.getElementById('description').value = review.description;
+            document.getElementById('image').value = review.image;
+
+            const createBtn = document.getElementById('create-btn');
+            createBtn.textContent = 'Update Review';
+            createBtn.onclick = function() {
+                updateReview(index);
+            };
+        }
+
+        // Update a review
+        function updateReview(index) {
+            const reviews = JSON.parse(localStorage.getItem('reviews'));
+            const updatedReview = {
+                title: document.getElementById('title').value,
+                rating: document.getElementById('rating').value,
+                description: document.getElementById('description').value,
+                image: document.getElementById('image').value
+            };
+
+            reviews[index] = updatedReview;
+            localStorage.setItem('reviews', JSON.stringify(reviews));
+            loadReviews();  // Reload the reviews after updating
+
+            // Reset the form
+            resetForm();
+        }
+
+        // Delete a review
+        function deleteReview(index) {
+            const reviews = JSON.parse(localStorage.getItem('reviews'));
+            reviews.splice(index, 1);
+            localStorage.setItem('reviews', JSON.stringify(reviews));
+            loadReviews();  // Reload the reviews after deletion
+        }
+
+        // Reset the form
+        function resetForm() {
+            document.getElementById('title').value = '';
+            document.getElementById('rating').value = '';
+            document.getElementById('description').value = '';
+            document.getElementById('image').value = '';
+
+            const createBtn = document.getElementById('create-btn');
+            createBtn.textContent = 'Create Review';
+            createBtn.onclick = createReview;
+        }
+
+        // Function to apply highlight based on URL parameter
+        function highlightMovieFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const movieIdToHighlight = parseInt(urlParams.get("hl"));
+
+            let movieElement = null;
+            
+            switch (movieIdToHighlight) {
+                case 1:
+                    movieElement = document.getElementById("TheGodMustbeCrazy");
+                    break;
+                case 2:
+                    movieElement = document.getElementById("HomeAlone");
+                    break;
+                case 3:
+                    movieElement = document.getElementById("Cars");
+                    break;
+                case 4:
+                    movieElement = document.getElementById("KungFuPanda");
+                    break;
+                case 5:
+                    movieElement = document.getElementById("BrotherBear");
+                    break;
+                case 6:
+                    movieElement = document.getElementById("EndGame");
+                    break;
+                case 7:
+                    movieElement = document.getElementById("FinalDestination");
+                    break;
+                case 8:
+                    movieElement = document.getElementById("Conjuring2");
+                    break;
+                case 9:
+                    movieElement = document.getElementById("TheNun");
+                    break;
+            }
+
+            if (movieElement) {
+                movieElement.classList.add("highlight"); // Add dotted border class
+                movieElement.scrollIntoView({ behavior: "smooth", block: "center" }); // Scroll to the movie
+            }
+        }
+
+        window.onload = function() {
+            highlightMovieFromURL();
+            loadReviews();
+        };
+    </script>
+</head>
+<body>
+    <h1>Movie Reviews</h1>
+
+    <div class="container">
+        <!-- Movie reviews will be dynamically added here -->
+    </div>
+
+    <!-- Review Form for Create or Update -->
+    <div class="form-container">
+        <h2>Review a Movie</h2>
+        <input type="text" id="title" placeholder="Movie Title" required>
+        <input type="number" id="rating" placeholder="Rating (1-5)" required>
+        <textarea id="description" placeholder="Description" required></textarea>
+        <input type="url" id="image" placeholder="Image URL" required>
+        <button id="create-btn" onclick="createReview()">Create Review</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Movie Reviews. All rights reserved.</p>
+    </footer>
+</body>
 </html>
